@@ -1,0 +1,11 @@
+dasun
+Loan Amount: $1000
+
+Loan Duration: 5 months
+
+Repayment Schedule
+$200
+$400
+$600
+$800
+$1000

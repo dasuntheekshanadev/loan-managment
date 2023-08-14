@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Client Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Additional styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .back-link {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-8">Client Details</h1>
+    <div class="bg-white p-8 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-2"><%= client.customerName %></h2>
+      <p class="text-gray-600 mb-2">Loan Amount: $<%= client.loanAmount %></p>
+      <p class="text-gray-600 mb-4">Loan Duration: <%= client.loanDuration %> months</p>
+      <h3 class="text-xl font-semibold mb-2">Repayment Schedule</h3>
+      <ul class="list-decimal pl-6 text-gray-600">
+        <% client.repaymentSchedule.forEach(installment => { %>
+          <li class="mb-1">$<%= installment %></li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <a href="/" class="back-link text-blue-500 hover:underline mt-4 block bg-white p-2 rounded-lg shadow-md">Back to Client List</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Additional styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .search-bar {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    .search-results {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="center-container">
+    <div class="container mx-auto p-8 bg-white rounded-md shadow-md fadeIn">
+      <h1 class="text-4xl font-bold mb-8">Loan Management System</h1>
+      
+      <!-- Search form -->
+      <div class="mb-6 search-bar p-4 rounded-md shadow-md">
+        <h2 class="text-2xl font-semibold mb-2">Search Clients</h2>
+        <form action="/search" method="GET" class="flex">
+          <input type="text" name="searchQuery" placeholder="Enter client name" class="p-2 rounded-l-md focus:outline-none w-4/5">
+          <button type="submit" class="bg-blue-500 text-white p-2 rounded-r-md hover:bg-blue-600 focus:outline-none w-1/5">Search</button>
+        </form>
+      </div>
+
+      <!-- Client list -->
+      <div class="mb-6">
+        <h2 class="text-2xl font-semibold">Client List</h2>
+        <ul class="list-disc pl-6 mt-2">
+          <% clients.forEach(client => { %>
+            <li><a href="/details/<%= client._id %>" class="text-blue-500 hover:underline"><%= client.customerName %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <!-- Display search results if available -->
+      <% if (searchQuery) { %>
+        <div class="mb-6 search-results p-4 rounded-md shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Search Results for "<%= searchQuery %>"</h3>
+          <% if (clients.length === 0) { %>
+            <p>No results found.</p>
+          <% } else { %>
+            <ul class="list-disc pl-6 mt-2">
+              <% clients.forEach(client => { %>
+                <li><a href="/details/<%= client._id %>" class="text-blue-500 hover:underline"><%= client.customerName %></a></li>
+              <% }) %>
+            </ul>
+          <% } %>
+        </div>
+      <% } %>
+
+      <!-- Add new client form -->
+      <div class="p-4 rounded-md shadow-md">
+        <h2 class="text-2xl font-semibold mb-2">Add New Client</h2>
+        <form action="/add" method="POST" enctype="multipart/form-data" class="mt-4">
+          <label for="customerName" class="block font-medium mb-1">Customer Name:</label>
+          <input type="text" name="customerName" required class="w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <label for="loanAmount" class="block font-medium mb-1 mt-2">Loan Amount:</label>
+          <input type="number" name="loanAmount" required class="w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <label for="loanDuration" class="block font-medium mb-1 mt-2">Loan Duration (months):</label>
+          <input type="number" name="loanDuration" required class="w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <label for="bankFile" class="block font-medium mb-1 mt-2">Bank File:</label>
+          <input type="file" name="bankFile" required class="w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 mt-4 rounded-md hover:bg-blue-600 focus:outline-none">Add Client</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
